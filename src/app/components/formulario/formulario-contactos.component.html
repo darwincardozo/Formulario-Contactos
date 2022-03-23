@@ -1,0 +1,205 @@
+<div class="content flex-row-fluid container mb-10 mt-10">
+  <div class="card">
+    <div class="contenedor">
+      <h1 class="text-white fw-bold">{{ titulo }}</h1>
+    </div>
+    <div class="card-body p-lg-17">
+      <div class="d-flex flex-column flex-lg-row mt-10">
+        <div class="flex-lg-row-fluid me-0 me-lg-20">
+          <form
+            class="form mt-15"
+            [formGroup]="productoForm"
+            (ngSubmit)="agregarContacto()"
+          >
+            <div class="d-flex flex-column mb-5 fv-row">
+              <label class="required fs-5 fw-bold mb-2">Nombre completo</label>
+              <input
+                type="text"
+                formControlName="nombreCompleto"
+                class="form-control form-control-lg"
+                placeholder=""
+              />
+              <div
+                class="text-danger"
+                *ngIf="
+                  productoForm.get('nombreCompleto')?.hasError('required') &&
+                  productoForm.get('nombreCompleto')?.touched
+                "
+              >
+                <span>El nombre completo es <strong>Obligatorio</strong></span>
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="
+                  productoForm.get('nombreCompleto')?.touched &&
+                  productoForm.get('nombreCompleto')?.value == !textPattern
+                "
+              >
+                <span>Ingrese solo <strong>Letras</strong></span>
+              </div>
+            </div>
+            <div class="d-flex flex-column mb-5 fv-row">
+              <label class="required fs-5 fw-bold mb-2"
+                >Nombre de la empresa</label
+              >
+              <input
+                type="text"
+                formControlName="nombreEmpresa"
+                class="form-control form-control-lg"
+                placeholder=""
+              />
+              <div
+                class="text-danger"
+                *ngIf="
+                  productoForm.get('nombreEmpresa')?.hasError('required') &&
+                  productoForm.get('nombreEmpresa')?.touched
+                "
+              >
+                <span
+                  >El nombre de la empresa es <strong>Obligatorio</strong></span
+                >
+              </div>
+            </div>
+            <div class="d-flex flex-column mb-5 fv-row">
+              <label class="required fs-5 fw-bold mb-2"
+                >Correo electrónico</label
+              >
+              <input
+                type="email"
+                formControlName="email"
+                class="form-control form-control-lg"
+                placeholder=""
+              />
+              <div
+                class="text-danger"
+                *ngIf="
+                  productoForm.get('email')?.hasError('required') &&
+                  productoForm.get('email')?.touched
+                "
+              >
+                <span
+                  >El correo electrónico es <strong>Obligatorio</strong></span
+                >
+              </div>
+            </div>
+            <div class="row mb-5">
+              <div class="col-md-6 fv-row">
+                <label class="required fs-5 fw-bold mb-2">Teléfono</label>
+
+                <input
+                  type="text"
+                  formControlName="telefono"
+                  class="form-control form-control-lg"
+                  placeholder=""
+                />
+                <div
+                  class="text-danger"
+                  *ngIf="
+                    productoForm.get('telefono')?.hasError('required') &&
+                    productoForm.get('telefono')?.touched
+                  "
+                >
+                  <span
+                    >El número de teléfono es <strong>Obligatorio</strong></span
+                  >
+                </div>
+                <div
+                  class="text-danger"
+                  *ngIf="
+                    productoForm.get('telefono')?.hasError('pattern') &&
+                    productoForm.get('telefono')?.touched
+                  "
+                >
+                  <span
+                    >Ingrese solo caractéres <strong>Numéricos</strong></span
+                  >
+                </div>
+                <div
+                  class="text-danger"
+                  *ngIf="
+                    productoForm.get('telefono')?.hasError('minlength') &&
+                    productoForm.get('telefono')?.touched
+                  "
+                >
+                  <span
+                    >Ingrese al menos 10
+                    <strong>caractéres numéricos</strong></span
+                  >
+                </div>
+              </div>
+              <div class="col-md-6 fv-row">
+                <label class="required fs-5 fw-bold mb-2">Categoría</label>
+                <select
+                  formControlName="categoria"
+                  data-control="select2"
+                  data-placeholder="Select a position..."
+                  class="form-select form-select-lg"
+                >
+                  <option value=""></option>
+                  <option value="Facturación">Facturación</option>
+                  <option value="soporte técnico">soporte técnico</option>
+                  <option value="ventas">ventas</option>
+                  <option value="información general">
+                    información general
+                  </option>
+                </select>
+                <div
+                  class="text-danger"
+                  *ngIf="
+                    productoForm.get('categoria')?.hasError('required') &&
+                    productoForm.get('categoria')?.touched
+                  "
+                >
+                  <span>La categoría es <strong>Obligatoria</strong></span>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex flex-column mb-8">
+              <label class="required fs-5 fw-bold mb-2">Mensaje</label>
+              <textarea
+                formControlName="mensaje"
+                class="form-control form-control-lg"
+                rows="4"
+                name="application"
+                placeholder="Escriba su mensaje"
+              ></textarea>
+              <div
+                class="text-danger"
+                *ngIf="
+                  productoForm.get('mensaje')?.hasError('required') &&
+                  productoForm.get('mensaje')?.touched
+                "
+              >
+                <span>El mensaje es <strong>Obligatorio</strong></span>
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="
+                  productoForm.get('mensaje')?.hasError('minlength') &&
+                  productoForm.get('mensaje')?.touched
+                "
+              >
+                <span>
+                  El mensaje debe tener mínimo 6 <strong>caractéres</strong>
+                </span>
+              </div>
+            </div>
+            <button
+              type="submit"
+              class="btn text-white fw-800"
+              id="kt_careers_submit_button"
+              style="background-color: #b4e41c"
+              [disabled]="productoForm.invalid"
+            >
+              <i
+                class="fa-solid fa-paper-plane"
+                style="color: white; font-size: 19px; margin-right: 5px"
+              ></i>
+              <span class="indicator-label fw-bold">Enviar</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
